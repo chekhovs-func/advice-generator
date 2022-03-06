@@ -1,7 +1,8 @@
 import '../styles/app.scss';
 import { useState } from 'react';
 import axios from 'axios';
-import divider from '../assets/pattern-divider-mobile.svg';
+import mobileDivider from '../assets/pattern-divider-mobile.svg';
+import desktopDivider from '../assets/pattern-divider-desktop.svg';
 import dice from '../assets/icon-dice.svg';
 
 export default function App() {
@@ -15,12 +16,11 @@ export default function App() {
       method: 'GET',
       url: 'https://api.adviceslip.com/advice',
     })
-      .then(
-        res =>
-          setAdvice({
-            id: res.data.slip.id,
-            body: res.data.slip.advice,
-          }) & console.log(advice.body)
+      .then(res =>
+        setAdvice({
+          id: res.data.slip.id,
+          body: res.data.slip.advice,
+        })
       )
       .catch(err => console.warn(err));
   };
@@ -30,7 +30,8 @@ export default function App() {
       <section>
         <h1>{`Advice #${advice.id}`}</h1>
         <p>{`"${advice.body}"`}</p>
-        <img src={divider} alt='A dividing line' />
+        <img src={mobileDivider} alt='A dividing line' className='mobile-divider' />
+        <img src={desktopDivider} alt='A dividing line' className='desktop-divider' />
         <button onClick={getAdvice}>
           <img src={dice} alt='An icon of a die' />
         </button>
